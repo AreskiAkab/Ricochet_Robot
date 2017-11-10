@@ -6,7 +6,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public  class Button extends StackPane{
-	//ton truc cest dla merde
+	//bonjour bitch
 		  Button(String name){
 			  Text text = new Text(name);
 			  text.setFont(Font.font(20));
