@@ -166,13 +166,13 @@ public class Plateau extends StackPane {
 					plateau[coordonneY-1][coordonneX].ajoutRobot(selection);
 					plateau[coordonneY-1][coordonneX].colorerCase();
 					if(plateau[coordonneY-1][coordonneX].getCible().equals(objectif)) {
-						System.out.println("Vous avez atteint l'objectif avec le robot");
+						System.out.println("Vous avez atteint l'objectif avec le robot "+this.selection.getColor()+" en "+ this.nbDeplacement);
 						break;
 					}
-					this.nbDeplacement ++;
 					coordonneX = this.selection.getCoordonneeX();
 					coordonneY = this.selection.getCoordonneeY();
 					if(coordonneY == 0) {
+						this.nbDeplacement ++;
 						break;
 					}
 			    }	
@@ -189,10 +189,14 @@ public class Plateau extends StackPane {
 					this.selection.seDeplaceHaut();
 					plateau[coordonneY+1][coordonneX].ajoutRobot(selection);
 					plateau[coordonneY+1][coordonneX].colorerCase();
-					this.nbDeplacement ++;
+					if(plateau[coordonneY+1][coordonneX].getCible().equals(objectif)) {
+						System.out.println("Vous avez atteint l'objectif avec le robot "+this.selection.getColor()+" en "+ this.nbDeplacement);
+						break;
+					}
 					coordonneX = this.selection.getCoordonneeX();
 					coordonneY = this.selection.getCoordonneeY();
 					if(coordonneY == plateau.length -1) {
+						this.nbDeplacement ++;
 						break;
 					}
 				}
@@ -210,10 +214,14 @@ public class Plateau extends StackPane {
 					this.selection.seDeplaceDroite();
 					plateau[coordonneY][coordonneX+1].ajoutRobot(selection);
 					plateau[coordonneY][coordonneX+1].colorerCase();
-					this.nbDeplacement ++;
+					if(plateau[coordonneY][coordonneX+1].getCible().equals(objectif)) {
+						System.out.println("Vous avez atteint l'objectif avec le robot "+this.selection.getColor()+" en "+ this.nbDeplacement);
+						break;
+					}
 					coordonneX = this.selection.getCoordonneeX();
 					coordonneY = this.selection.getCoordonneeY();
 					if(coordonneX == plateau.length - 1) {
+						this.nbDeplacement ++;
 						break;
 					}
 				
@@ -231,10 +239,14 @@ public class Plateau extends StackPane {
 				this.selection.seDeplaceDroite();
 				plateau[coordonneY][coordonneX-1].ajoutRobot(selection);
 				plateau[coordonneY][coordonneX-1].colorerCase();
-				this.nbDeplacement ++;
+				if(plateau[coordonneY][coordonneX-1].getCible().equals(objectif)) {
+					System.out.println("Vous avez atteint l'objectif avec le robot "+this.selection.getColor()+" en "+ this.nbDeplacement);
+					break;
+				}
 				coordonneX = this.selection.getCoordonneeX();
 				coordonneY = this.selection.getCoordonneeY();
 				if(coordonneX == 0) {
+					this.nbDeplacement ++;
 					break;
 				}
 			  }
