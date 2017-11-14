@@ -12,21 +12,36 @@ public class Robot {
 		return this.color;
 	}
 	public void setCoordonnee(int x,int y) {
-		cX = x;
-		cY = y;
+		cX = y;
+		cY = x;
 	}
 public void setSelection(boolean b) {
 	this.selection = b;
 }
+public boolean getSelection() {
+	return this.selection;
+}
 	public int getCoordonneeX() {
-		return this.cX;
-	}
-	public int getCoordonneeY() {
 		return this.cY;
 	}
-	public void seDeplace() {
+	public int getCoordonneeY() {
+		return this.cX;
+	}
 	
+	public void seDeplaceHaut() {
+			this.cY ++;
+		}
+	
+   public void seDeplaceBas() {
+	       this.cY --;
 		
 	}
-
+   public void seDeplaceDroite() {
+		this.cX++;
+		
+	}
+   public void seDeplaceGauche() {
+		this.cX--;
+		
+	}
 }

@@ -14,7 +14,6 @@ public class Case extends StackPane {
 	private String cible;
 	private Robot robot;
 	private Rectangle carre;
-	private boolean selection;
 	private int coordonneeX;
 	private int coordonneeY;
 
@@ -28,7 +27,7 @@ public class Case extends StackPane {
 		cible = "";
 		carre = new Rectangle(55, 37);
 		colorerCase();
-		carre.setOpacity(1);
+		carre.setOpacity(0);
 		carre.setFill(Color.WHITE);
 		setAlignment(Pos.CENTER);
 		getChildren().addAll(carre);
@@ -44,13 +43,10 @@ public class Case extends StackPane {
 	public void ajoutRobot(Robot r) {
 		this.robot = r;
 		colorerCase();
-		r.setCoordonnee(this.coordonneeX, this.coordonneeY);
-		System.out.println(this.coordonneeX+" "+this.coordonneeY);
+		r.setCoordonnee(this.coordonneeY, this.coordonneeX);
+		System.out.println(this.coordonneeY+" "+this.coordonneeX);
 	}
 
-	public void retirerrobot() {
-		this.robot = null;
-	}
 
 	public boolean possedeUnRobot() {
 		return (this.robot != null);
@@ -63,6 +59,12 @@ public class Case extends StackPane {
 			this.carre.setFill(Color.WHITE);
 		}
 	}
+	public void retirerrobot() {
+		this.robot = null;
+		this.carre.setFill(Color.WHITE);
+		this.carre.setOpacity(0);
+	}
+	
 
 	public void marqueruneCible(String cible) {
 		this.cible = cible;

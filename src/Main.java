@@ -3,9 +3,11 @@
     import java.io.InputStream;
     import java.nio.file.Files;
     import java.nio.file.Paths;
+import java.util.Scanner;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,6 +15,8 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -41,6 +45,43 @@ public class Main extends Application {
 			ImageView imgV = new ImageView(img);
 			imgV.setFitHeight(720);
 			imgV.setFitWidth(1080);
+			imgV.setFocusTraversable(true); 
+			imgV.setOnKeyPressed(keyEvent -> {
+            	System.out.println(keyEvent.getText());
+            	if(keyEvent.getText().equals("&")) {
+            		System.out.println("vous avez sélectionner le robot rouge.");
+            		plateau.selectionRobotCouleur(true,false,false,false);
+            	}
+            	if(keyEvent.getText().equals("é")) {
+            		System.out.println("vous avez sélectionner le robot bleu.");
+            		plateau.selectionRobotCouleur(false,false,true,false);
+            	}
+            	if(keyEvent.getText().equals("" + '"')) {
+            		System.out.println("vous avez sélectionner le robot vert.");
+            		plateau.selectionRobotCouleur(false,true,false,false);
+            	}
+            	if(keyEvent.getText().equals("'")) {
+            		System.out.println("vous avez sélectionner le robot jaune.");
+            		plateau.selectionRobotCouleur(false,false,false,true);
+            	}
+            	if(keyEvent.getText().equals("z")) {
+            		System.out.println("je me déplace vers le haut");
+					plateau.deplacementHaut();
+				}
+            	if(keyEvent.getText().equals("s")) {
+            		System.out.println("je me déplace vers le bas");
+						plateau.deplacementBas();
+				}
+            	if(keyEvent.getText().equals("d")) {
+            		System.out.println("je me déplace vers la droite");
+						plateau.deplacementdroite();
+				}
+            	if(keyEvent.getText().equals("q")) {
+            		System.out.println("je me déplace vers la gauche");
+						plateau.deplacementgauche();
+				}
+            	
+            });
 			final File file = new File("./ressources/Sons/jeux.mp3"); 
 	        final Media media = new Media(file.toURI().toString()); 
 	        final MediaPlayer mediaPlayer = new MediaPlayer(media); 
@@ -61,7 +102,8 @@ public class Main extends Application {
 				mediaPlayer.setMute(false);
 			});
 	  		couperSon.setOnMouseClicked(event ->{
-	  		mediaPlayer.setMute(true);});
+	  		mediaPlayer.setMute(true);
+	  		});
 	  		jouerSon.setVisible(false);
 	  		couperSon.setVisible(false);
 			plateau.setTranslateX(10);
@@ -80,10 +122,13 @@ public class Main extends Application {
 				jouerSon.setVisible(true);
 				couperSon.setVisible(true);
 				plateau.setVisible(true);
+				//String cible = plateau.choixCibleAleatoire();
+				//System.out.println(cible);
+				//plateau.setObjectif(cible);
 				//plateau.toString();
 				Start.setVisible(false);
 				IA.setVisible(false);
-				menu.setFullScreen(true);
+				//menu.setFullScreen(true);
 				Titre.setTranslateX(700);
 				Titre.setTranslateY(100);
 				imgV.setFitHeight(1080);
@@ -109,7 +154,6 @@ public class Main extends Application {
 			menu.setScene(scene);
 			menu.show();
 			menu.setTitle("Ricochet Robots");
-			
 		}
 
 	
