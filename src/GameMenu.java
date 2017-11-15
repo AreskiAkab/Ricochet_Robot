@@ -35,12 +35,7 @@ public class GameMenu extends Parent {
 		       
 				  
 		  		root.setPrefSize(900, 700);
-		  		InputStream Acceuil = Files.newInputStream(Paths.get("./ressources/images/Background.jpg"));
-		  		Image img = new Image(Acceuil);
-				Acceuil.close();
-				ImageView imgV = new ImageView(img);
-				imgV.setFitHeight(720);
-				imgV.setFitWidth(1080);
+				ImageView imgV = ImageBuilder.menu();
 		  		VBox menu = new VBox(30);
 		  		menu.setTranslateX(450);
 		  		menu.setTranslateY(200);

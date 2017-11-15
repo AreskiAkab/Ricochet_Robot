@@ -13,7 +13,6 @@ public class Case extends StackPane {
 	private boolean murdroit;
 	private String cible;
 	private Robot robot;
-	private Rectangle carre;
 	private int coordonneeX;
 	private int coordonneeY;
 
@@ -25,16 +24,7 @@ public class Case extends StackPane {
 		murgauche = false;
 		murdroit = false;
 		cible = "";
-		carre = new Rectangle(55, 37);
-		colorerCase();
-		carre.setOpacity(0);
-		carre.setFill(Color.WHITE);
-		setAlignment(Pos.CENTER);
-		getChildren().addAll(carre);
 		
-	}
-	public void setOpacityON() {
-		carre.setOpacity(1);	
 	}
 	public Robot getRobot() {
 		return this.robot;
@@ -42,7 +32,6 @@ public class Case extends StackPane {
 
 	public void ajoutRobot(Robot r) {
 		this.robot = r;
-		colorerCase();
 		r.setCoordonnee(this.coordonneeY, this.coordonneeX);
 		System.out.println(this.coordonneeY+" "+this.coordonneeX);
 	}
@@ -51,18 +40,10 @@ public class Case extends StackPane {
 	public boolean possedeUnRobot() {
 		return (this.robot != null);
 	}
-	public void colorerCase() {
-		if(this.possedeUnRobot()) {
-			this.carre.setOpacity(1);
-			this.carre.setFill(this.robot.getColor());
-		} else {
-			this.carre.setFill(Color.WHITE);
-		}
-	}
+	
 	public void retirerrobot() {
 		this.robot = null;
-		this.carre.setFill(Color.WHITE);
-		this.carre.setOpacity(0);
+		
 	}
 	
 

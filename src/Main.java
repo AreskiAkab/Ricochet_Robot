@@ -38,118 +38,101 @@ public class Main extends Application {
 		public void start(Stage menu) throws IOException {
         	//----------------ECRAN 1--------------------------------//
         	Pane root = new Pane();
-        	Plateau plateau = new Plateau();
-        	InputStream Acceuil = Files.newInputStream(Paths.get("./ressources/images/Background.jpg"));
-	  		Image img = new Image(Acceuil);
-			Acceuil.close();
-			ImageView imgV = new ImageView(img);
-			imgV.setFitHeight(720);
-			imgV.setFitWidth(1080);
+        	Timer sablier = new Timer();
+        	AffichagePlateau plateau = new AffichagePlateau();
+        	MenuInGame menuJeu = new MenuInGame(plateau);
+        	menuJeu.setVisible(false);
+			ImageView imgV = ImageBuilder.imageAcceuil(); 
 			imgV.setFocusTraversable(true); 
-			imgV.setOnKeyPressed(keyEvent -> {
+			root.setOnKeyPressed(keyEvent -> {
             	System.out.println(keyEvent.getText());
             	if(keyEvent.getText().equals("&")) {
             		System.out.println("vous avez sélectionner le robot rouge.");
-            		plateau.selectionRobotCouleur(true,false,false,false);
+            		plateau.getPlateau().selectionRobotCouleur(true,false,false,false);
             	}
             	if(keyEvent.getText().equals("é")) {
             		System.out.println("vous avez sélectionner le robot bleu.");
-            		plateau.selectionRobotCouleur(false,false,true,false);
+            		plateau.getPlateau().selectionRobotCouleur(false,false,true,false);
             	}
             	if(keyEvent.getText().equals("" + '"')) {
             		System.out.println("vous avez sélectionner le robot vert.");
-            		plateau.selectionRobotCouleur(false,true,false,false);
+            		plateau.getPlateau().selectionRobotCouleur(false,true,false,false);
             	}
             	if(keyEvent.getText().equals("'")) {
             		System.out.println("vous avez sélectionner le robot jaune.");
-            		plateau.selectionRobotCouleur(false,false,false,true);
+            		plateau.getPlateau().selectionRobotCouleur(false,false,false,true);
             	}
             	if(keyEvent.getText().equals("z")) {
             		System.out.println("je me déplace vers le haut");
-					plateau.deplacementHaut();
+					plateau.getPlateau().deplacementHaut();
 				}
             	if(keyEvent.getText().equals("s")) {
             		System.out.println("je me déplace vers le bas");
-						plateau.deplacementBas();
+						plateau.getPlateau().deplacementBas();
 				}
             	if(keyEvent.getText().equals("d")) {
             		System.out.println("je me déplace vers la droite");
-						plateau.deplacementdroite();
+						plateau.getPlateau().deplacementdroite();
 				}
             	if(keyEvent.getText().equals("q")) {
             		System.out.println("je me déplace vers la gauche");
-						plateau.deplacementgauche();
+						plateau.getPlateau().deplacementgauche();
 				}
             	
             });
-			final File file = new File("./ressources/Sons/jeux.mp3"); 
-	        final Media media = new Media(file.toURI().toString()); 
-	        final MediaPlayer mediaPlayer = new MediaPlayer(media); 
-	        mediaPlayer.setVolume(0.1);
+	        final MediaPlayer mediaPlayer = MediaBuilder.sonJeu(); 
 			root.setPrefSize(1080, 720);
 			GameMenu gamemenu = new GameMenu();
 			GameMenuOption moption = new GameMenuOption();
 			gamemenu.gamemenuoption = moption;
 			moption.menu = gamemenu;
 			moption.setVisible(false);
-			//moption.setOpacity(0.7);
 			gamemenu.setVisible(true);
 			plateau.setVisible(false);
 			Button IA = new Button("I.A");
-			Button couperSon = new Button("COUPER LE SON");
-			Button jouerSon = new Button("Relancer");
-			jouerSon.setOnMouseClicked(event ->{
+			//ButtonInGame pause = new ButtonInGame(ImageBuilder.pause());
+			//ButtonInGame play = new ButtonInGame(ImageBuilder.play());
+			menuJeu.getPlay().setOnMouseClicked(event ->{
 				mediaPlayer.setMute(false);
 			});
-	  		couperSon.setOnMouseClicked(event ->{
+			menuJeu.getPause().setOnMouseClicked(event ->{
 	  		mediaPlayer.setMute(true);
 	  		});
-	  		jouerSon.setVisible(false);
-	  		couperSon.setVisible(false);
 			plateau.setTranslateX(10);
 			plateau.setTranslateY(100);
 	  		IA.setTranslateX(450);
 	  		IA.setTranslateY(350);
-			//gamemenu.setOpacity(0.7);
-			Text Titre = new Text("Ricochet Robots");
-			Titre.setFont(Font.font("game robot", 70));
-			Titre.setFill(Color.WHITE);
-			Titre.setTranslateX(300);
-			Titre.setTranslateY(100);
+	  		menuJeu.getSSablier().setOnMouseClicked(event ->{
+	  			sablier.startTimer();
+	  			long seconds = sablier.checkTimer();
+	  				System.out.println(seconds);
+	  		});
+	  		menuJeu.getFSablier().setOnMouseClicked(event ->{
+		  			sablier.checkTimer();
+		  		});
+	  		Text titre = TextBuilder.titreFenetre();
 			Button Start = new Button("JOUEUR VS JOUEUR");
 			Start.setOnMouseClicked(event ->{
+				menuJeu.setVisible(true);
 				mediaPlayer.play(); 
-				jouerSon.setVisible(true);
-				couperSon.setVisible(true);
 				plateau.setVisible(true);
-				//String cible = plateau.choixCibleAleatoire();
-				//System.out.println(cible);
-				//plateau.setObjectif(cible);
-				//plateau.toString();
 				Start.setVisible(false);
 				IA.setVisible(false);
-				//menu.setFullScreen(true);
-				Titre.setTranslateX(700);
-				Titre.setTranslateY(100);
+				titre.setTranslateX(700);
+				titre.setTranslateY(100);
 				imgV.setFitHeight(1080);
 				imgV.setFitWidth(1920);
-				root.setPrefSize(1920, 1080);
+				root.setPrefSize(1920,1080);
 				plateau.setTranslateX(800);
 				plateau.setTranslateY(200);
 	  		});
 			Start.setTranslateX(450);
 	  		Start.setTranslateY(300);
-	  		Button quitter = new Button("QUITTER");
-			quitter.setOnMouseClicked(event ->{
+	  		
+			menuJeu.getQuitter().setOnMouseClicked(event ->{
 				System.exit(0);
 			});
-			couperSon.setTranslateY(10);
-			couperSon.setTranslateX(10);
-			jouerSon.setTranslateY(50);
-			jouerSon.setTranslateX(10);
-			quitter.setTranslateY(90);
-			quitter.setTranslateX(10);
-			root.getChildren().addAll(imgV,plateau,IA,Start,quitter,couperSon,jouerSon,gamemenu, moption, Titre);		
+			root.getChildren().addAll(imgV,plateau,IA,Start,menuJeu,gamemenu, moption, titre);		
 			Scene scene = new Scene(root);
 			menu.setScene(scene);
 			menu.show();

@@ -15,10 +15,7 @@ public class GameMenuOption extends Parent {
 	public GameMenuOption() throws IOException {
 
 		Pane root1 = new Pane();
-		InputStream option = Files.newInputStream(Paths.get("./ressources/images/optionBackground.jpg"));
-  		Image img = new Image(option);
-		option.close();
-		ImageView imgV = new ImageView(img);
+		ImageView imgV = ImageBuilder.menuOption();
 		imgV.setFitHeight(720);
 		imgV.setFitWidth(1080);
 		root1.setPrefSize(900, 700);
