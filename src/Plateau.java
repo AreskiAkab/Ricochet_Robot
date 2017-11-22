@@ -6,7 +6,7 @@ public class Plateau {
 	private Robot jaune = new Robot(Color.YELLOW);
 	private Robot vert = new Robot(Color.GREEN);
 	private Robot bleu = new Robot(Color.BLUE);
-	private Robot selection;
+	private Robot selection= new Robot(Color.WHITE);
 	private String objectif;
 	private int nbDeplacement = 1;
 
@@ -82,6 +82,9 @@ public class Plateau {
 		System.out.println(this.objectif);
 
 	}
+	public Robot getSelection() {
+		return this.selection;
+	}
 	public String getObjectif() {
 		return this.objectif;
 	}
@@ -121,7 +124,12 @@ public class Plateau {
 public AffichageCase getCase(int i, int j) {
 		return plateau[i][j];
 	}
-	public void deplacementBas(){
+/*public Case[] calculDeplacement(){
+	
+	
+	
+}*/
+	public Case deplacementBas(){
 		int coordonneX = 0;
 		int coordonneY = 0;
 		    if(this.selection.getCoordonneeY() != 0) {
@@ -129,7 +137,6 @@ public AffichageCase getCase(int i, int j) {
 				coordonneY = this.selection.getCoordonneeY();
 				while(!plateau[coordonneY][coordonneX].getCase().isMurbas()&&!plateau[coordonneY-1][coordonneX].getCase().isMurhaut()&&!plateau[coordonneY-1][coordonneX].getCase().possedeUnRobot()) {
 					plateau[coordonneY][coordonneX].retirerrobot();
-					this.selection.seDeplaceBas();
 					plateau[coordonneY-1][coordonneX].ajoutRobot(selection);
 					plateau[coordonneY-1][coordonneX].colorerCase();
 					if(plateau[coordonneY-1][coordonneX].getCase().getCible().equals(objectif)) {
@@ -146,8 +153,9 @@ public AffichageCase getCase(int i, int j) {
 			    }
 				this.nbDeplacement ++;
 		    }
+		    return this.plateau[coordonneX][coordonneY].getCase();
 	   }
-	public void deplacementHaut() {
+	public Case deplacementHaut() {
 		int coordonneX = 0;
 		int coordonneY = 0;
 			if(this.selection.getCoordonneeY() < plateau.length -1) {
@@ -155,7 +163,6 @@ public AffichageCase getCase(int i, int j) {
 				coordonneY = this.selection.getCoordonneeY();
 				while(!plateau[coordonneY][coordonneX].getCase().isMurhaut()&&!plateau[coordonneY+1][coordonneX].getCase().isMurbas()&&!plateau[coordonneY+1][coordonneX].getCase().possedeUnRobot()) {
 					plateau[coordonneY][coordonneX].retirerrobot();
-					this.selection.seDeplaceHaut();
 					plateau[coordonneY+1][coordonneX].ajoutRobot(selection);
 					plateau[coordonneY+1][coordonneX].colorerCase();
 					if(plateau[coordonneY+1][coordonneX].getCase().getCible().equals(objectif)) {
@@ -172,8 +179,9 @@ public AffichageCase getCase(int i, int j) {
 				}
 				this.nbDeplacement ++;
 			}
+			return this.plateau[coordonneX][coordonneY].getCase();
 	}
-	public void deplacementdroite(){
+	public Case deplacementdroite(){
 		int coordonneX = 0;
 		int coordonneY = 0;
 			if(this.selection.getCoordonneeX() < plateau.length -1) {
@@ -181,7 +189,6 @@ public AffichageCase getCase(int i, int j) {
 				coordonneY = this.selection.getCoordonneeY();
 				while(!plateau[coordonneY][coordonneX].getCase().isMurdroit()&&!plateau[coordonneY][coordonneX+1].getCase().isMurgauche()&&!plateau[coordonneY][coordonneX+1].getCase().possedeUnRobot()) {
 					plateau[coordonneY][coordonneX].retirerrobot();
-					this.selection.seDeplaceDroite();
 					plateau[coordonneY][coordonneX+1].ajoutRobot(selection);
 					plateau[coordonneY][coordonneX+1].colorerCase();
 					if(plateau[coordonneY][coordonneX+1].getCase().getCible().equals(objectif)) {
@@ -199,8 +206,9 @@ public AffichageCase getCase(int i, int j) {
 			    }
 				this.nbDeplacement ++;
 			}
+			return this.plateau[coordonneX][coordonneY].getCase();
 	}
-	public void deplacementgauche(){
+	public Case deplacementgauche(){
 		int coordonneX = 0;
 		int coordonneY = 0;
 			if(this.selection.getCoordonneeX() != 0) {
@@ -208,7 +216,6 @@ public AffichageCase getCase(int i, int j) {
 				coordonneY = this.selection.getCoordonneeY();
 				while(!plateau[coordonneY][coordonneX].getCase().isMurgauche()&&!plateau[coordonneY][coordonneX-1].getCase().isMurdroit()&&!plateau[coordonneY][coordonneX-1].getCase().possedeUnRobot()) {
 				plateau[coordonneY][coordonneX].retirerrobot();
-				this.selection.seDeplaceDroite();
 				plateau[coordonneY][coordonneX-1].ajoutRobot(selection);
 				plateau[coordonneY][coordonneX-1].colorerCase();
 				if(plateau[coordonneY][coordonneX-1].getCase().getCible().equals(objectif)) {
@@ -223,6 +230,21 @@ public AffichageCase getCase(int i, int j) {
 			  }
 				this.nbDeplacement ++;
 			}
+			return this.plateau[coordonneX][coordonneY].getCase();
 			
 	}
+	   public Case[] calculDeplacer(Robot r) {
+		   int x=r.getCoordonneeX(),y=r.getCoordonneeY();
+		   Case[] tab=new Case[4];
+		   this.selection=r;
+		   tab[0]=deplacementHaut();
+		   this.selection.setCoordonnee(x, y);
+		   tab[1]=deplacementdroite();
+		   this.selection.setCoordonnee(x, y);
+		   tab[2]=deplacementBas();
+		   this.selection.setCoordonnee(x, y);
+		   tab[3]=deplacementgauche();
+		   this.selection.setCoordonnee(x, y);
+		   return tab;
+	   }
 }

@@ -90,8 +90,6 @@ public class Main extends Application {
 			gamemenu.setVisible(true);
 			plateau.setVisible(false);
 			Button IA = new Button("I.A");
-			//ButtonInGame pause = new ButtonInGame(ImageBuilder.pause());
-			//ButtonInGame play = new ButtonInGame(ImageBuilder.play());
 			menuJeu.getPlay().setOnMouseClicked(event ->{
 				mediaPlayer.setMute(false);
 			});

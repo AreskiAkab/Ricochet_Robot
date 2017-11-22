@@ -78,7 +78,17 @@ public class Case extends StackPane {
 	public void setMurhaut(boolean murhaut) {
 		this.murhaut = murhaut;
 	}
-
+	
+	public int getCoordonneeX() {
+		
+		return this.coordonneeX;
+	}
+	
+	public int getCoordonneeY() {
+		
+		return this.coordonneeY;
+	}
+	
 	public void setMurbas(boolean murbas) {
 		this.murbas = murbas;
 	}

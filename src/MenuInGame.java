@@ -10,6 +10,8 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class MenuInGame extends Parent {
+	AffichagePlateau plateau ;
+	ImageView couleurRobot;
 	ButtonInGame play;
 	ButtonInGame pause;
 	ButtonInGame quitter;
@@ -20,8 +22,10 @@ public class MenuInGame extends Parent {
 	  		root.setPrefSize(300,1920);
 	  		root.setStyle("-fx-background-color: #808080;");
 	  		root.setOpacity(0.6);
-	  		ImageView imgCible = ImageBuilder.imageCible(plateau.getPlateau().getObjectif());
+	  		this.plateau = plateau;
+	  		ImageView imgCible = ImageBuilder.imageCible(this.plateau.getPlateau().getObjectif());
 	  		Text cibleT = TextBuilder.menuCible();
+	  		Text robot = TextBuilder.menuRobot();
 			imgCible.setFitHeight(50);
 			imgCible.setFitWidth(50);
 	  		pause = new ButtonInGame(ImageBuilder.pause());
@@ -33,6 +37,8 @@ public class MenuInGame extends Parent {
 			imgCible.setTranslateY(390);
 			cibleT.setTranslateX(5);
 			cibleT.setTranslateY(430);
+			robot.setTranslateX(5);
+			robot.setTranslateY(500);
 		  	pause.setTranslateX(190);
 		  	pause.setTranslateY(10);
 		  	play.setTranslateX(95);
@@ -43,9 +49,10 @@ public class MenuInGame extends Parent {
 		  	startSablier.setTranslateY(100);
 		  	finSablier.setTranslateX(10);
 		  	finSablier.setTranslateY(150);
-		  	root.getChildren().addAll(imgCible,cibleT,pause,play,quitter,startSablier,finSablier);
+		  	root.getChildren().addAll(imgCible,cibleT,robot,pause,play,quitter,startSablier,finSablier);
 			getChildren().addAll(root);	
 		}
+
 		public Button getSSablier() {
 			return startSablier;
 		}
