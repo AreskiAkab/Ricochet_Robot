@@ -39,44 +39,50 @@ public class Main extends Application {
         	//----------------ECRAN 1--------------------------------//
         	Pane root = new Pane();
         	Timer sablier = new Timer();
-        	AffichagePlateau plateau = new AffichagePlateau();
+        	Plateau p = new Plateau();
+        	AffichagePlateau plateau = new AffichagePlateau(p);
         	MenuInGame menuJeu = new MenuInGame(plateau);
         	menuJeu.setVisible(false);
 			ImageView imgV = ImageBuilder.imageAcceuil(); 
 			imgV.setFocusTraversable(true); 
 			root.setOnKeyPressed(keyEvent -> {
             	System.out.println(keyEvent.getText());
+            	Deplacement d = new Deplacement();
             	if(keyEvent.getText().equals("&")) {
             		System.out.println("vous avez sélectionner le robot rouge.");
-            		plateau.getPlateau().selectionRobotCouleur(true,false,false,false);
+            		p.selectionRobotCouleur(true,false,false,false);
             	}
             	if(keyEvent.getText().equals("é")) {
             		System.out.println("vous avez sélectionner le robot bleu.");
-            		plateau.getPlateau().selectionRobotCouleur(false,false,true,false);
+            		p.selectionRobotCouleur(false,false,true,false);
             	}
             	if(keyEvent.getText().equals("" + '"')) {
             		System.out.println("vous avez sélectionner le robot vert.");
-            		plateau.getPlateau().selectionRobotCouleur(false,true,false,false);
+            		p.selectionRobotCouleur(false,true,false,false);
             	}
             	if(keyEvent.getText().equals("'")) {
             		System.out.println("vous avez sélectionner le robot jaune.");
-            		plateau.getPlateau().selectionRobotCouleur(false,false,false,true);
+            		p.selectionRobotCouleur(false,false,false,true);
             	}
             	if(keyEvent.getText().equals("z")) {
             		System.out.println("je me déplace vers le haut");
-					plateau.getPlateau().deplacementHaut();
+					//plateau.getPlateau().deplacementHaut();
+            	    d.deplacementr(p.getSelection(),p,plateau,"H");
 				}
             	if(keyEvent.getText().equals("s")) {
             		System.out.println("je me déplace vers le bas");
-						plateau.getPlateau().deplacementBas();
+						//plateau.getPlateau().deplacementBas();
+            		 d.deplacementr(p.getSelection(),p,plateau,"");
 				}
             	if(keyEvent.getText().equals("d")) {
             		System.out.println("je me déplace vers la droite");
-						plateau.getPlateau().deplacementdroite();
+						//plateau.getPlateau().deplacementdroite();
+            		 d.deplacementr(p.getSelection(),p,plateau,"D");
 				}
             	if(keyEvent.getText().equals("q")) {
             		System.out.println("je me déplace vers la gauche");
-						plateau.getPlateau().deplacementgauche();
+						//plateau.getPlateau().deplacementgauche();
+            		 d.deplacementr(p.getSelection(),p,plateau,"G");
 				}
             	
             });

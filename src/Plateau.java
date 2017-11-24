@@ -1,7 +1,7 @@
 import javafx.scene.paint.Color;
 
 public class Plateau {
-	private AffichageCase[][] plateau;
+	private Case[][] plateau;
 	private Robot rouge = new Robot(Color.RED);
 	private Robot jaune = new Robot(Color.YELLOW);
 	private Robot vert = new Robot(Color.GREEN);
@@ -11,63 +11,63 @@ public class Plateau {
 	private int nbDeplacement = 1;
 
 	public Plateau() {
-		plateau = new AffichageCase[16][16];
+		plateau = new Case[16][16];
 		for (int i = 0; i < plateau.length; i++) {
 			for (int j = 0; j < plateau.length; j++) {
-				plateau[i][j] = new AffichageCase(i,j);
+				plateau[i][j] = new Case(i,j);
 			}
 		}
 		
 
 		// Création des murs et cibles
-		plateau[7][8].getCase().casePleine();
-		plateau[7][7].getCase().casePleine();
-		plateau[8][7].getCase().casePleine();
-		plateau[8][8].getCase().casePleine();
-		plateau[0][3].getCase().setMurdroit(true);
-		plateau[0][13].getCase().setMurdroit(true);
-		plateau[1][12].getCase().angleBD();
-		plateau[1][12].getCase().marqueruneCible("1");
-		plateau[2][4].getCase().angleHG();
-		plateau[2][4].getCase().marqueruneCible("2");
-		plateau[3][2].getCase().angleBG();
-		plateau[3][2].getCase().marqueruneCible("3");
-		plateau[3][9].getCase().angleHG();
-		plateau[3][9].getCase().marqueruneCible("4");
-		plateau[4][5].getCase().angleHD();
-		plateau[4][5].getCase().marqueruneCible("5");
-		plateau[4][14].getCase().angleHD();
-		plateau[4][14].getCase().marqueruneCible("6");
-		plateau[5][0].getCase().setMurhaut(true);
-		plateau[5][3].getCase().angleBD();
-		plateau[5][3].getCase().marqueruneCible("7");
-		plateau[6][11].getCase().angleBG();
-		plateau[6][11].getCase().marqueruneCible("8");
-		plateau[6][15].getCase().setMurhaut(true);
-		plateau[9][1].getCase().angleHD();
-		plateau[9][1].getCase().marqueruneCible("9");
-		plateau[10][6].getCase().angleHG();
-		plateau[10][6].getCase().marqueruneCible("10");
-		plateau[10][10].getCase().angleBD();
-		plateau[10][10].getCase().marqueruneCible("11");
-		plateau[11][0].getCase().setMurhaut(true);
-		plateau[11][3].getCase().angleBD();
-		plateau[11][3].getCase().marqueruneCible("12");
+		plateau[7][8].casePleine();
+		plateau[7][7].casePleine();
+		plateau[8][7].casePleine();
+		plateau[8][8].casePleine();
+		plateau[0][3].setMurdroit(true);
+		plateau[0][13].setMurdroit(true);
+		plateau[1][12].angleBD();
+		plateau[1][12].marqueruneCible("1");
+		plateau[2][4].angleHG();
+		plateau[2][4].marqueruneCible("2");
+		plateau[3][2].angleBG();
+		plateau[3][2].marqueruneCible("3");
+		plateau[3][9].angleHG();
+		plateau[3][9].marqueruneCible("4");
+		plateau[4][5].angleHD();
+		plateau[4][5].marqueruneCible("5");
+		plateau[4][14].angleHD();
+		plateau[4][14].marqueruneCible("6");
+		plateau[5][0].setMurhaut(true);
+		plateau[5][3].angleBD();
+		plateau[5][3].marqueruneCible("7");
+		plateau[6][11].angleBG();
+		plateau[6][11].marqueruneCible("8");
+		plateau[6][15].setMurhaut(true);
+		plateau[9][1].angleHD();
+		plateau[9][1].marqueruneCible("9");
+		plateau[10][6].angleHG();
+		plateau[10][6].marqueruneCible("10");
+		plateau[10][10].angleBD();
+		plateau[10][10].marqueruneCible("11");
+		plateau[11][0].setMurhaut(true);
+		plateau[11][3].angleBD();
+		plateau[11][3].marqueruneCible("12");
 		// System.out.println(""+plateau[11][3].getCible()+"");
-		plateau[11][14].getCase().angleBD();
-		plateau[11][14].getCase().marqueruneCible("13");
+		plateau[11][14].angleBD();
+		plateau[11][14].marqueruneCible("13");
 		// System.out.print(""+plateau[11][14].getCible()+"");
-		plateau[12][9].getCase().angleBG();
-		plateau[12][9].getCase().marqueruneCible("14");
-		plateau[13][7].getCase().angleBD();
-		plateau[13][7].getCase().marqueruneCible("15");
-		plateau[13][15].getCase().setMurhaut(true);
-		plateau[14][5].getCase().angleBG();
-		plateau[14][5].getCase().marqueruneCible("16");
-		plateau[14][12].getCase().angleHG();
-		plateau[14][12].getCase().marqueruneCible("17");
-		plateau[15][2].getCase().setMurdroit(true);
-		plateau[15][9].getCase().setMurdroit(true);
+		plateau[12][9].angleBG();
+		plateau[12][9].marqueruneCible("14");
+		plateau[13][7].angleBD();
+		plateau[13][7].marqueruneCible("15");
+		plateau[13][15].setMurhaut(true);
+		plateau[14][5].angleBG();
+		plateau[14][5].marqueruneCible("16");
+		plateau[14][12].angleHG();
+		plateau[14][12].marqueruneCible("17");
+		plateau[15][2].setMurdroit(true);
+		plateau[15][9].setMurdroit(true);
 		// placement des robots
 
 		plateau[12][8].ajoutRobot(rouge);
@@ -85,23 +85,34 @@ public class Plateau {
 	public Robot getSelection() {
 		return this.selection;
 	}
+	public void setSelection(Robot r) {
+		 this.selection = r;
+	}
+	public Robot[] getAllRobot() {
+		Robot[] tab = new Robot[4];
+		tab[0] = this.rouge;
+		tab[1] = this.bleu;
+		tab[2] = this.vert;
+		tab[3] = this.jaune;
+		return tab;
+	}
 	public String getObjectif() {
 		return this.objectif;
 	}
  Robot getRouge() {
-		return rouge;
+		return this.rouge;
 	}
 
 	public Robot getJaune() {
-		return jaune;
+		return this.jaune;
 	}
 
 	public Robot getVert() {
-		return vert;
+		return this.vert;
 	}
 
 	public Robot getBleu() {
-		return bleu;
+		return this.bleu;
 	}
     public void selectionRobotCouleur(boolean R,boolean V,boolean B,boolean J) {
     	if(R) {
@@ -121,130 +132,17 @@ public class Plateau {
     	vert.setSelection(V);
     	jaune.setSelection(J);
     }
-public AffichageCase getCase(int i, int j) {
+public Case getCase(int i, int j) {
 		return plateau[i][j];
 	}
-/*public Case[] calculDeplacement(){
-	
-	
-	
-}*/
-	public Case deplacementBas(){
-		int coordonneX = 0;
-		int coordonneY = 0;
-		    if(this.selection.getCoordonneeY() != 0) {
-		    	coordonneX = this.selection.getCoordonneeX();
-				coordonneY = this.selection.getCoordonneeY();
-				while(!plateau[coordonneY][coordonneX].getCase().isMurbas()&&!plateau[coordonneY-1][coordonneX].getCase().isMurhaut()&&!plateau[coordonneY-1][coordonneX].getCase().possedeUnRobot()) {
-					plateau[coordonneY][coordonneX].retirerrobot();
-					plateau[coordonneY-1][coordonneX].ajoutRobot(selection);
-					plateau[coordonneY-1][coordonneX].colorerCase();
-					if(plateau[coordonneY-1][coordonneX].getCase().getCible().equals(objectif)) {
-						
-						System.out.println("Vous avez atteint l'objectif avec le robot "+this.selection.getColor()+" en "+ this.nbDeplacement);
-						break;
-					}
-					coordonneX = this.selection.getCoordonneeX();
-					coordonneY = this.selection.getCoordonneeY();
-					if(coordonneY == 0) {
-						
-						break;
-					}
-			    }
-				this.nbDeplacement ++;
-		    }
-		    return this.plateau[coordonneX][coordonneY].getCase();
-	   }
-	public Case deplacementHaut() {
-		int coordonneX = 0;
-		int coordonneY = 0;
-			if(this.selection.getCoordonneeY() < plateau.length -1) {
-				coordonneX = this.selection.getCoordonneeX();
-				coordonneY = this.selection.getCoordonneeY();
-				while(!plateau[coordonneY][coordonneX].getCase().isMurhaut()&&!plateau[coordonneY+1][coordonneX].getCase().isMurbas()&&!plateau[coordonneY+1][coordonneX].getCase().possedeUnRobot()) {
-					plateau[coordonneY][coordonneX].retirerrobot();
-					plateau[coordonneY+1][coordonneX].ajoutRobot(selection);
-					plateau[coordonneY+1][coordonneX].colorerCase();
-					if(plateau[coordonneY+1][coordonneX].getCase().getCible().equals(objectif)) {
-						
-						System.out.println("Vous avez atteint l'objectif avec le robot "+this.selection.getColor()+" en "+ this.nbDeplacement);
-						break;
-					}
-					coordonneX = this.selection.getCoordonneeX();
-					coordonneY = this.selection.getCoordonneeY();
-					if(coordonneY == plateau.length -1) {
-						
-						break;
-					}
-				}
-				this.nbDeplacement ++;
-			}
-			return this.plateau[coordonneX][coordonneY].getCase();
+public int taillePlateau() {
+	return plateau.length;
+}
+
+	public int getNbDeplacement() {
+		return nbDeplacement;
 	}
-	public Case deplacementdroite(){
-		int coordonneX = 0;
-		int coordonneY = 0;
-			if(this.selection.getCoordonneeX() < plateau.length -1) {
-				coordonneX = this.selection.getCoordonneeX();
-				coordonneY = this.selection.getCoordonneeY();
-				while(!plateau[coordonneY][coordonneX].getCase().isMurdroit()&&!plateau[coordonneY][coordonneX+1].getCase().isMurgauche()&&!plateau[coordonneY][coordonneX+1].getCase().possedeUnRobot()) {
-					plateau[coordonneY][coordonneX].retirerrobot();
-					plateau[coordonneY][coordonneX+1].ajoutRobot(selection);
-					plateau[coordonneY][coordonneX+1].colorerCase();
-					if(plateau[coordonneY][coordonneX+1].getCase().getCible().equals(objectif)) {
-						
-						System.out.println("Vous avez atteint l'objectif avec le robot "+this.selection.getColor()+" en "+ this.nbDeplacement);
-						break;
-					}
-					coordonneX = this.selection.getCoordonneeX();
-					coordonneY = this.selection.getCoordonneeY();
-					if(coordonneX == plateau.length - 1) {
-						
-						break;
-					}
-				
-			    }
-				this.nbDeplacement ++;
-			}
-			return this.plateau[coordonneX][coordonneY].getCase();
+	public void setNbDeplacement(int nbDeplacement) {
+		this.nbDeplacement = nbDeplacement;
 	}
-	public Case deplacementgauche(){
-		int coordonneX = 0;
-		int coordonneY = 0;
-			if(this.selection.getCoordonneeX() != 0) {
-				coordonneX = this.selection.getCoordonneeX();
-				coordonneY = this.selection.getCoordonneeY();
-				while(!plateau[coordonneY][coordonneX].getCase().isMurgauche()&&!plateau[coordonneY][coordonneX-1].getCase().isMurdroit()&&!plateau[coordonneY][coordonneX-1].getCase().possedeUnRobot()) {
-				plateau[coordonneY][coordonneX].retirerrobot();
-				plateau[coordonneY][coordonneX-1].ajoutRobot(selection);
-				plateau[coordonneY][coordonneX-1].colorerCase();
-				if(plateau[coordonneY][coordonneX-1].getCase().getCible().equals(objectif)) {
-					System.out.println("Vous avez atteint l'objectif avec le robot "+this.selection.getColor()+" en "+ this.nbDeplacement);
-					break;
-				}
-				coordonneX = this.selection.getCoordonneeX();
-				coordonneY = this.selection.getCoordonneeY();
-				if(coordonneX == 0) {
-					break;
-				}
-			  }
-				this.nbDeplacement ++;
-			}
-			return this.plateau[coordonneX][coordonneY].getCase();
-			
-	}
-	   public Case[] calculDeplacer(Robot r) {
-		   int x=r.getCoordonneeX(),y=r.getCoordonneeY();
-		   Case[] tab=new Case[4];
-		   this.selection=r;
-		   tab[0]=deplacementHaut();
-		   this.selection.setCoordonnee(x, y);
-		   tab[1]=deplacementdroite();
-		   this.selection.setCoordonnee(x, y);
-		   tab[2]=deplacementBas();
-		   this.selection.setCoordonnee(x, y);
-		   tab[3]=deplacementgauche();
-		   this.selection.setCoordonnee(x, y);
-		   return tab;
-	   }
 }

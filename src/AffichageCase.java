@@ -5,8 +5,9 @@ import javafx.scene.shape.Rectangle;
 public class AffichageCase extends StackPane {
 	private Case p;
 	private Rectangle carre;
-	public AffichageCase(int i,int j) {
-		p = new Case(i,j);
+	public AffichageCase(Case c) {
+		this.p = c;
+		//p = new Case(i,j);
 		carre = new Rectangle(55, 37);
 		carre.setOpacity(0);
 		carre.setFill(Color.WHITE);

@@ -9,9 +9,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
 public class AffichagePlateau extends StackPane {
-	private Plateau plateau;
-	public AffichagePlateau() throws IOException {
-		plateau = new Plateau();
+	private Plateau p;
+	private AffichageCase[][] plateau;
+	public AffichagePlateau(Plateau p) throws IOException {
+		this.p = p;
+		plateau = new AffichageCase[p.taillePlateau()][p.taillePlateau()];
 		final StackPane root = new StackPane(); 
 		InputStream Acceuil = Files.newInputStream(Paths.get("./ressources/images/Robots.jpg"));
 		Image img = new Image(Acceuil);
@@ -25,19 +27,27 @@ public class AffichagePlateau extends StackPane {
 			posYcase = posYcase - 44.6;
 			posXcase =0;
 			for (int j = 0; j < 16; j++) {
-				plateau.getCase(i, j).setAlignment(Pos.CENTER);
-				plateau.getCase(i, j).setTranslateX(posXcase);
-				plateau.getCase(i, j).setTranslateY(posYcase);
+				plateau[i][j] = new AffichageCase(p.getCase(i, j));
+				plateau[i][j].setAlignment(Pos.CENTER);
+				plateau[i][j].setTranslateX(posXcase);
+				plateau[i][j].setTranslateY(posYcase);
+				if(plateau[i][j].getCase().possedeUnRobot()) {
+					plateau[i][j].colorerCase();
+				}
 				posXcase = posXcase + 67.3;
-				root.getChildren().addAll(plateau.getCase(i, j));
+				root.getChildren().addAll(plateau[i][j]);
 			}
 		}
 		root.setTranslateX(-502);
 		root.setTranslateY(380);
 		getChildren().addAll(imgV,root);
 	}
+	public AffichageCase getAffCase(int i,int j) {
+		return plateau[i][j];
+		
+	}
 	public Plateau getPlateau() {
-		return plateau;
+		return this.p;
 	}
 
 }
