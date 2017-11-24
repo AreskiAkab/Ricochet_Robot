@@ -1,13 +1,11 @@
 import java.io.IOException;
 
-import javafx.animation.FadeTransition;
 import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
+
 
 public class MenuInGame extends Parent {
 	AffichagePlateau plateau ;
@@ -17,8 +15,10 @@ public class MenuInGame extends Parent {
 	ButtonInGame quitter;
 	Button startSablier;
 	Button finSablier;
+	Pane root;
 		public MenuInGame(AffichagePlateau plateau) throws IOException {
 			Pane root = new Pane();
+			final MediaPlayer mediaPlayer = MediaBuilder.sonJeu();
 	  		root.setPrefSize(300,1920);
 	  		root.setStyle("-fx-background-color: #808080;");
 	  		root.setOpacity(0.6);
@@ -29,8 +29,17 @@ public class MenuInGame extends Parent {
 			imgCible.setFitHeight(50);
 			imgCible.setFitWidth(50);
 	  		pause = new ButtonInGame(ImageBuilder.pause());
+	  		pause.setOnMouseClicked(event ->{
+		  		mediaPlayer.setMute(true);
+		  		});
 			play = new ButtonInGame(ImageBuilder.play());
+			play.setOnMouseClicked(event ->{
+				mediaPlayer.play();
+			});
 			quitter = new ButtonInGame(ImageBuilder.off());
+			quitter.setOnMouseClicked(event ->{
+				System.exit(0);
+			});
 			startSablier = new Button("Activer sablier");
 		  	finSablier = new Button("Stopper sablier");
 		  	imgCible.setTranslateX(150);
@@ -67,6 +76,10 @@ public class MenuInGame extends Parent {
 		}
 		public ButtonInGame getQuitter() {
 			return quitter;
+		}
+
+		public Pane getroot() {
+			return root;
 		}
 		
 }

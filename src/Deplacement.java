@@ -1,4 +1,4 @@
-import java.io.IOException;
+
 
 public class Deplacement {
 	int coordonneX ;
