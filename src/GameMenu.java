@@ -29,6 +29,7 @@ import javafx.util.Duration;
 
 public class GameMenu extends Parent {
 	GameMenuOption gamemenuoption;
+	Button start;
 		  	public GameMenu() throws IOException {  
 		  		Pane root = new Pane();
 		  
@@ -39,7 +40,7 @@ public class GameMenu extends Parent {
 		  		VBox menu = new VBox(30);
 		  		menu.setTranslateX(450);
 		  		menu.setTranslateY(200);
-		  		Button start = new Button("START");
+		  		start = new Button("START");
 		  		start.setOnMouseClicked(event -> {
 		  		FadeTransition ft = new FadeTransition(Duration.seconds(0.75),this);
 		  		ft.setFromValue(1);
@@ -70,6 +71,10 @@ public class GameMenu extends Parent {
 		  		menu.getChildren().addAll(exit);
 		  		
 			}
+		  	
+		  	public Button getStart() {
+		  		return this.start;
+		  	}
 
 			
 	  }

@@ -20,10 +20,11 @@ public class TextBuilder {
 			cible.setFill(Color.WHITE);
 			return cible;
 		}
-		public static Text menuRobot() {
-			Text cible = new Text("Le robot selectionne est");
-			cible.setFont(Font.font("game robot", 17));
+		public static Text robotchoix() {
+			Text cible = new Text("Choisissez votre robot dans \n la liste ci-dessous");
+			cible.setFont(Font.font("game robot", 16));
 			cible.setFill(Color.WHITE);
 			return cible;
 		}
+		
 }

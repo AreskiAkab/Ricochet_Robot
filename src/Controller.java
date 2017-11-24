@@ -6,16 +6,17 @@ public class Controller {
 	Deplacement d;
 	Timer sablier;
 	Pane root;
-	Button[] tabButton;
+	GameMenu menu;
 	MenuInGame menuJeu;
-		Controller(Plateau p, Deplacement d,Timer sablier,Pane root,AffichagePlateau plateau,Button[] tabButton,MenuInGame menuJeu ) {
+	String selectionRobot;
+		Controller(Plateau p, Deplacement d,Timer sablier,Pane root,AffichagePlateau plateau,GameMenu menu ,MenuInGame menuJeu ) {
 			this.menuJeu = menuJeu;
 			this.plateau = plateau;
 			this.p = p;
 			this.d = d;
 			this.sablier = sablier;
 			this.root = root;
-			this.tabButton = tabButton;
+			this.menu = menu;
 			
 		}
 		public void controllerMain(){
@@ -24,6 +25,7 @@ public class Controller {
             	if(keyEvent.getText().equals("&")) {
             		System.out.println("vous avez sélectionner le robot rouge.");
             		p.selectionRobotCouleur(true,false,false,false);
+            		
             	}
             	if(keyEvent.getText().equals("é")) {
             		System.out.println("vous avez sélectionner le robot bleu.");
@@ -59,19 +61,10 @@ public class Controller {
 				}
             	
             });
-			tabButton[0].setOnMouseClicked(event ->{
+			menu.getStart().setOnMouseClicked(event ->{
 				menuJeu.setVisible(true);
-				//mediaPlayer.play(); 
 				plateau.setVisible(true);
-				tabButton[0].setVisible(false);
-				tabButton[1].setVisible(false);
-				/*titre.setTranslateX(700);
-				titre.setTranslateY(100);
-				imgV.setFitHeight(1080);
-				imgV.setFitWidth(1920);
-				root.setPrefSize(1920,1080);
-				plateau.setTranslateX(800);
-				plateau.setTranslateY(200);*/
+				menu.setVisible(false);
 	  		});
 			menuJeu.getSSablier().setOnMouseClicked(event ->{
 	  			sablier.startTimer();
@@ -81,7 +74,6 @@ public class Controller {
 	  		menuJeu.getFSablier().setOnMouseClicked(event ->{
 		  			sablier.checkTimer();
 		  		});
-			
-			
+	  		
 		}
 }
