@@ -7,7 +7,6 @@ public class AffichageCase extends StackPane {
 	private Rectangle carre;
 	public AffichageCase(Case c) {
 		this.p = c;
-		//p = new Case(i,j);
 		carre = new Rectangle(55, 37);
 		carre.setOpacity(0);
 		carre.setFill(Color.WHITE);

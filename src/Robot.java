@@ -12,8 +12,8 @@ public class Robot {
 		return this.color;
 	}
 	public void setCoordonnee(int x,int y) {
-		cX = y;
-		cY = x;
+		cX = x;
+		cY = y;
 	}
 public void setSelection(boolean b) {
 	this.selection = b;
@@ -22,10 +22,10 @@ public boolean getSelection() {
 	return this.selection;
 }
 	public int getCoordonneeX() {
-		return this.cY;
+		return this.cX;
 	}
 	public int getCoordonneeY() {
-		return this.cX;
+		return this.cY;
 	}
 	
 	public void seDeplaceHaut() {

@@ -35,11 +35,11 @@ public class MenuInGame extends Parent {
 	  		VBox box = new VBox(10);
 	  		box.setPadding(new Insets(20,20,20,20));
 	  		box.getChildren().addAll(boxrobot);
-	  		ImageView imgCible = ImageBuilder.imageCible(this.plateau.getPlateau().getObjectif());
+	  		//ImageView imgCible = ImageBuilder.imageCible(this.plateau.getPlateau().getObjectif());
 	  		Text cibleT = TextBuilder.menuCible();
 	  		Text robotchoix = TextBuilder.robotchoix();
-			imgCible.setFitHeight(50);
-			imgCible.setFitWidth(50);
+			//imgCible.setFitHeight(50);
+			//imgCible.setFitWidth(50);
 	  		pause = new ButtonInGame(ImageBuilder.pause());
 	  		pause.setOnMouseClicked(event ->{
 		  		mediaPlayer.setMute(true);
@@ -54,8 +54,8 @@ public class MenuInGame extends Parent {
 			});
 			startSablier = new Button("Activer sablier");
 		  	finSablier = new Button("Stopper sablier");
-		  	imgCible.setTranslateX(150);
-			imgCible.setTranslateY(390);
+		  	//imgCible.setTranslateX(150);
+			//imgCible.setTranslateY(390);
 			cibleT.setTranslateX(5);
 			cibleT.setTranslateY(430);
 			robotchoix.setTranslateX(5);
@@ -72,23 +72,23 @@ public class MenuInGame extends Parent {
 		  	startSablier.setTranslateY(100);
 		  	finSablier.setTranslateX(10);
 		  	finSablier.setTranslateY(150);
-		  	root.getChildren().addAll(imgCible,cibleT,box,robotchoix,pause,play,quitter,startSablier,finSablier);
+		  	root.getChildren().addAll(cibleT,box,robotchoix,pause,play,quitter,startSablier,finSablier);
 			getChildren().addAll(root);
 			boxrobot.getSelectionModel().selectedItemProperty().addListener( (v,OldValue , NewValue) ->{
 		  		if(NewValue.equals("rouge")) {
-		  			System.out.println("vous avez sélectionner le robot rouge.");
+		  			System.out.println("vous avez sï¿½lectionner le robot rouge.");
 		  			plateau.getPlateau().selectionRobotCouleur(true,false,false,false);
 		  		}
 		  		else if (NewValue.equals("bleu")) {
-		  			System.out.println("vous avez sélectionner le robot bleu.");
+		  			System.out.println("vous avez sï¿½lectionner le robot bleu.");
 		  			plateau.getPlateau().selectionRobotCouleur(false,false,true,false);
 		  		}
 		  		else if (NewValue.equals("vert")) {
-		  			System.out.println("vous avez sélectionner le robot vert.");
+		  			System.out.println("vous avez sï¿½lectionner le robot vert.");
 		  			plateau.getPlateau().selectionRobotCouleur(false,true,false,false);
 		  		}
 		  		else {
-		  			System.out.println("vous avez sélectionner le robot jaune.");
+		  			System.out.println("vous avez sï¿½lectionner le robot jaune.");
 		  			plateau.getPlateau().selectionRobotCouleur(false,false,false,true);
 		  		}
 		  		});

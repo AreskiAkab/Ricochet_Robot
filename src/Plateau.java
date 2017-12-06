@@ -7,7 +7,8 @@ public class Plateau {
 	private Robot vert = new Robot(Color.GREEN);
 	private Robot bleu = new Robot(Color.BLUE);
 	private Robot selection= new Robot(Color.WHITE);
-	private String objectif;
+	//private String objectif;
+	private Case objectif;
 	private int nbDeplacement = 1;
 
 	public Plateau() {
@@ -19,68 +20,73 @@ public class Plateau {
 		}
 		
 
-		// Création des murs et cibles
-		plateau[7][8].casePleine();
-		plateau[7][7].casePleine();
+		// Crï¿½ation des murs et cibles
 		plateau[8][7].casePleine();
+		plateau[7][7].casePleine();
+		plateau[7][8].casePleine();
 		plateau[8][8].casePleine();
-		plateau[0][3].setMurdroit(true);
-		plateau[0][13].setMurdroit(true);
-		plateau[1][12].angleBD();
-		plateau[1][12].marqueruneCible("1");
-		plateau[2][4].angleHG();
-		plateau[2][4].marqueruneCible("2");
-		plateau[3][2].angleBG();
-		plateau[3][2].marqueruneCible("3");
-		plateau[3][9].angleHG();
-		plateau[3][9].marqueruneCible("4");
-		plateau[4][5].angleHD();
-		plateau[4][5].marqueruneCible("5");
-		plateau[4][14].angleHD();
-		plateau[4][14].marqueruneCible("6");
-		plateau[5][0].setMurhaut(true);
-		plateau[5][3].angleBD();
-		plateau[5][3].marqueruneCible("7");
-		plateau[6][11].angleBG();
-		plateau[6][11].marqueruneCible("8");
-		plateau[6][15].setMurhaut(true);
-		plateau[9][1].angleHD();
-		plateau[9][1].marqueruneCible("9");
-		plateau[10][6].angleHG();
-		plateau[10][6].marqueruneCible("10");
+		plateau[3][0].setMurdroit(true);
+		plateau[13][0].setMurdroit(true);
+		plateau[12][1].angleBD();
+		plateau[12][1].marqueruneCible("1");
+		plateau[4][2].angleHG();
+		plateau[4][2].marqueruneCible("2");
+		plateau[2][3].angleBG();
+		plateau[2][3].marqueruneCible("3");
+		plateau[9][3].angleHG();
+		plateau[9][3].marqueruneCible("4");
+		plateau[5][4].angleHD();
+		plateau[5][4].marqueruneCible("5");
+		plateau[14][4].angleHD();
+		plateau[14][4].marqueruneCible("6");
+		plateau[0][2].setMurhaut(true);
+		plateau[3][5].angleBD();
+		plateau[3][5].marqueruneCible("7");
+		plateau[11][6].angleBG();
+		plateau[11][6].marqueruneCible("8");
+		plateau[15][6].setMurhaut(true);
+		plateau[1][9].angleHD();
+		plateau[1][9].marqueruneCible("9");
+		plateau[6][10].angleHG();
+		plateau[6][10].marqueruneCible("10");
 		plateau[10][10].angleBD();
 		plateau[10][10].marqueruneCible("11");
-		plateau[11][0].setMurhaut(true);
-		plateau[11][3].angleBD();
-		plateau[11][3].marqueruneCible("12");
+		plateau[0][11].setMurhaut(true);
+		plateau[3][11].angleBD();
+		plateau[3][11].marqueruneCible("12");
 		// System.out.println(""+plateau[11][3].getCible()+"");
-		plateau[11][14].angleBD();
-		plateau[11][14].marqueruneCible("13");
+		plateau[14][11].angleBD();
+		plateau[14][11].marqueruneCible("13");
 		// System.out.print(""+plateau[11][14].getCible()+"");
-		plateau[12][9].angleBG();
-		plateau[12][9].marqueruneCible("14");
-		plateau[13][7].angleBD();
-		plateau[13][7].marqueruneCible("15");
+		plateau[9][12].angleBG();
+		plateau[9][12].marqueruneCible("14");
+		plateau[7][13].angleBD();
+		plateau[7][13].marqueruneCible("15");
+	//	plateau[13][15].setMurhaut(true);
 		plateau[13][15].setMurhaut(true);
-		plateau[14][5].angleBG();
-		plateau[14][5].marqueruneCible("16");
-		plateau[14][12].angleHG();
-		plateau[14][12].marqueruneCible("17");
-		plateau[15][2].setMurdroit(true);
-		plateau[15][9].setMurdroit(true);
+		plateau[5][14].angleBG();
+		plateau[5][14].marqueruneCible("16");
+		plateau[12][14].angleHG();
+		plateau[12][14].marqueruneCible("17");
+		plateau[2][15].setMurdroit(true);
+		plateau[9][15].setMurdroit(true);
 		// placement des robots
 
-		plateau[12][8].ajoutRobot(rouge);
-		plateau[5][12].ajoutRobot(bleu);
+		plateau[15][15].ajoutRobot(rouge);
+		plateau[12][5].ajoutRobot(bleu);
 		plateau[12][12].ajoutRobot(jaune);
-		plateau[6][3].ajoutRobot(vert);
+		plateau[3][6].ajoutRobot(vert);
 		
 		int lower = 1;
 		int higher = 17;
 		int random = (int)(Math.random() * (higher-lower)) + lower;
-		this.objectif = ""+random;
-		System.out.println(this.objectif);
+		//this.objectif = ""+random;
+		this.objectif = plateau[6][10];
+		//System.out.println(this.objectif);
 
+	}
+	public void setCaseObj(String s){
+		
 	}
 	public Robot getSelection() {
 		return this.selection;
@@ -96,10 +102,12 @@ public class Plateau {
 		tab[3] = this.jaune;
 		return tab;
 	}
-	public String getObjectif() {
+	public Case getObjectif() {
 		return this.objectif;
+
 	}
- Robot getRouge() {
+	
+	public Robot getRouge() {
 		return this.rouge;
 	}
 

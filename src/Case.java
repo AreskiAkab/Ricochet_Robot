@@ -10,6 +10,7 @@ public class Case extends StackPane {
 	private Robot robot;
 	private int coordonneeX;
 	private int coordonneeY;
+	private int distance;
 
 	public Case(int x, int y) {
 		this.coordonneeX = x ;
@@ -19,7 +20,14 @@ public class Case extends StackPane {
 		murgauche = false;
 		murdroit = false;
 		cible = "";
+		distance = 0;
 		
+	}
+	public void setDistance(int n){
+		this.distance=n;
+	}
+	public int getDistance(){
+		return this.distance;
 	}
 	public Robot getRobot() {
 		return this.robot;
@@ -27,8 +35,8 @@ public class Case extends StackPane {
 
 	public void ajoutRobot(Robot r) {
 		this.robot = r;
-		r.setCoordonnee(this.coordonneeY, this.coordonneeX);
-		System.out.println(this.coordonneeY+" "+this.coordonneeX);
+		r.setCoordonnee(this.coordonneeX, this.coordonneeY);
+		//System.out.println(this.coordonneeY+" "+this.coordonneeX);
 	}
 
 
@@ -133,6 +141,20 @@ public class Case extends StackPane {
 
 	public String getCible() {
 		return this.cible;
+	}
+	
+	public boolean equals(Object o){
+		if(!(this instanceof Object)){
+			return false;
+		}
+		Case a = (Case) o;
+		if(this.coordonneeX == a.coordonneeX && this.coordonneeY == a.coordonneeY){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
 	}
 
 }
