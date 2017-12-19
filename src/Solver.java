@@ -4,6 +4,7 @@ public class Solver {
 	Plateau plateau;
 	Robot[] tabRobots;
 	Case[] chemin ;
+	Case objectif;
 	
 	public Solver(Plateau plateau,Robot[] tabRobots,Case[] chemin) {
 		this.plateau = plateau;
